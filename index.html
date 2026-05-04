@@ -7,7 +7,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" rel="stylesheet">
 
-<!-- Performance warmups -->
+<!-- Performance warmup -->
 <link rel="preconnect" href="https://find-the-markers-roblox.fandom.com">
 <link rel="preconnect" href="https://www.roblox.com">
 
@@ -27,12 +27,12 @@ body {
     align-items: center;
     background: radial-gradient(circle at top, #1e293b, #020617);
     color: #e5e7eb;
+    text-align: center;
 }
 
 h1 {
-    font-size: 44px;
+    font-size: 46px;
     margin: 0;
-    text-align: center;
     background: linear-gradient(135deg,#3b82f6,#22c55e);
     -webkit-background-clip: text;
     color: transparent;
@@ -41,58 +41,32 @@ h1 {
 p {
     color: #9ca3af;
     margin-top: 10px;
-    text-align: center;
-}
-
-/* Buttons */
-button {
-    border: none;
-    cursor: pointer;
-    font-weight: 800;
-    border-radius: 18px;
-    transition: 0.25s;
-}
-
-/* Enable button */
-.enable {
-    margin-top: 30px;
-    padding: 18px 40px;
-    font-size: 18px;
-    background: #334155;
-    color: white;
-}
-
-.enable:hover {
-    background: #475569;
 }
 
 /* Launch button */
 .launch {
-    margin-top: 20px;
-    padding: 30px 70px;
-    font-size: 26px;
+    margin-top: 40px;
+    padding: 32px 80px;
+    font-size: 28px;
+    font-weight: 800;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
     color: white;
     background: linear-gradient(135deg,#3b82f6,#22c55e);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    opacity: 0.5;
-    pointer-events: none;
-    transform: scale(1);
-}
-
-.launch.enabled {
-    opacity: 1;
-    pointer-events: auto;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+    transition: 0.25s;
     animation: pulse 2.5s infinite;
 }
 
-.launch.enabled:hover {
+.launch:hover {
     transform: scale(1.08);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    box-shadow: 0 35px 90px rgba(0,0,0,0.8);
 }
 
 @keyframes pulse {
     0%, 100% { filter: brightness(1); }
-    50% { filter: brightness(1.2); }
+    50% { filter: brightness(1.15); }
 }
 </style>
 </head>
@@ -100,25 +74,12 @@ button {
 <body>
 
 <h1>Find The Markers</h1>
-<p>Enable launch mode before opening everything</p>
+<p>One click launches everything</p>
 
-<button class="enable" onclick="enableLaunch()">Enable Launch Mode</button>
-<button id="launchBtn" class="launch" onclick="openAll()">🚀 Launch Everything</button>
+<button class="launch" onclick="openAll()">🚀 Launch Everything</button>
 
 <script>
-let allowed = false;
-
-function enableLaunch() {
-    allowed = true;
-    document.getElementById("launchBtn").classList.add("enabled");
-}
-
 function openAll() {
-    if (!allowed) {
-        alert("Enable Launch Mode first");
-        return;
-    }
-
     const links = [
         "https://www.roblox.com/games/7896264844/Find-the-Markers#!/game-instances",
         "https://find-the-markers-roblox.fandom.com/wiki/Find_The_Markers_Wiki",
@@ -126,11 +87,23 @@ function openAll() {
         "https://find-the-markers-roblox.fandom.com/wiki/Biomes"
     ];
 
-    links.forEach((link, i) => {
-        setTimeout(() => {
-            window.open(link, "_blank");
-        }, i * 150);
-    });
+    let i = 0;
+
+    function openNext() {
+        if (i >= links.length) return;
+
+        const win = window.open(links[i], "_blank");
+
+        if (!win) {
+            alert("Popup blocked — please allow popups for this site and try again.");
+            return;
+        }
+
+        i++;
+        setTimeout(openNext, 450); // stagger = higher success rate
+    }
+
+    openNext();
 }
 </script>
 
