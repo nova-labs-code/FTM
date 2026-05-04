@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find The Markers Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" rel="stylesheet">
+
+<!-- Performance warmups -->
+<link rel="preconnect" href="https://find-the-markers-roblox.fandom.com">
+<link rel="preconnect" href="https://www.roblox.com">
+
+<link rel="prefetch" href="https://www.roblox.com/games/7896264844/Find-the-Markers#!/game-instances">
+<link rel="prefetch" href="https://find-the-markers-roblox.fandom.com/wiki/Find_The_Markers_Wiki">
+<link rel="prefetch" href="https://find-the-markers-roblox.fandom.com/wiki/Markers">
+<link rel="prefetch" href="https://find-the-markers-roblox.fandom.com/wiki/Biomes">
+
+<style>
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #1e293b, #020617);
+    color: #e5e7eb;
+}
+
+h1 {
+    font-size: 44px;
+    margin: 0;
+    text-align: center;
+    background: linear-gradient(135deg,#3b82f6,#22c55e);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+p {
+    color: #9ca3af;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Buttons */
+button {
+    border: none;
+    cursor: pointer;
+    font-weight: 800;
+    border-radius: 18px;
+    transition: 0.25s;
+}
+
+/* Enable button */
+.enable {
+    margin-top: 30px;
+    padding: 18px 40px;
+    font-size: 18px;
+    background: #334155;
+    color: white;
+}
+
+.enable:hover {
+    background: #475569;
+}
+
+/* Launch button */
+.launch {
+    margin-top: 20px;
+    padding: 30px 70px;
+    font-size: 26px;
+    color: white;
+    background: linear-gradient(135deg,#3b82f6,#22c55e);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    opacity: 0.5;
+    pointer-events: none;
+    transform: scale(1);
+}
+
+.launch.enabled {
+    opacity: 1;
+    pointer-events: auto;
+    animation: pulse 2.5s infinite;
+}
+
+.launch.enabled:hover {
+    transform: scale(1.08);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+}
+
+@keyframes pulse {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Find The Markers</h1>
+<p>Enable launch mode before opening everything</p>
+
+<button class="enable" onclick="enableLaunch()">Enable Launch Mode</button>
+<button id="launchBtn" class="launch" onclick="openAll()">🚀 Launch Everything</button>
+
+<script>
+let allowed = false;
+
+function enableLaunch() {
+    allowed = true;
+    document.getElementById("launchBtn").classList.add("enabled");
+}
+
+function openAll() {
+    if (!allowed) {
+        alert("Enable Launch Mode first");
+        return;
+    }
+
+    const links = [
+        "https://www.roblox.com/games/7896264844/Find-the-Markers#!/game-instances",
+        "https://find-the-markers-roblox.fandom.com/wiki/Find_The_Markers_Wiki",
+        "https://find-the-markers-roblox.fandom.com/wiki/Markers",
+        "https://find-the-markers-roblox.fandom.com/wiki/Biomes"
+    ];
+
+    links.forEach((link, i) => {
+        setTimeout(() => {
+            window.open(link, "_blank");
+        }, i * 150);
+    });
+}
+</script>
+
+</body>
+</html>
